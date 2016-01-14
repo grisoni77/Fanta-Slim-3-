@@ -1,0 +1,114 @@
+<?php
+namespace Fanta\Entity;
+
+use Doctrine\ORM\Mapping AS ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="Fanta\Repository\League")
+ * @ORM\Table(name="leagues")
+ **/
+class League
+{
+    /** @ORM\Id @ORM\Column(type="integer") @ORM\GeneratedValue **/
+    protected $id;
+    /** @ORM\Column(type="string") **/
+    protected $name;
+    /**
+     * @ORM\OneToMany(targetEntity="Team", mappedBy="league")
+     **/
+    protected $teams;
+    /**
+     * @ORM\OneToMany(targetEntity="Contract", mappedBy="league")
+     **/
+    protected $contracts;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->teams = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add team
+     *
+     * @param \Fanta\Entity\Team $team
+     *
+     * @return League
+     */
+    public function addTeam(\Fanta\Entity\Team $team)
+    {
+        $this->teams[] = $team;
+
+        return $this;
+    }
+
+    /**
+     * Remove team
+     *
+     * @param \Fanta\Entity\Team $team
+     */
+    public function removeTeam(\Fanta\Entity\Team $team)
+    {
+        $this->teams->removeElement($team);
+    }
+
+    /**
+     * Get teams
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTeams()
+    {
+        return $this->teams;
+    }
+
+    /**
+     * Add contract
+     *
+     * @param \Fanta\Entity\Contract $contract
+     *
+     * @return League
+     */
+    public function addContract(\Fanta\Entity\Contract $contract)
+    {
+        $this->contracts[] = $contract;
+
+        return $this;
+    }
+
+    /**
+     * Remove contract
+     *
+     * @param \Fanta\Entity\Contract $contract
+     */
+    public function removeContract(\Fanta\Entity\Contract $contract)
+    {
+        $this->contracts->removeElement($contract);
+    }
+
+    /**
+     * Get contracts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContracts()
+    {
+        return $this->contracts;
+    }
+}

@@ -5,7 +5,9 @@
     <ul>
         {% for team in teams %}
             <li>
-                <a href="{{ path_for('team-detail', {'team_id':team.id}) }}">{{ team.name }}</a>
+                <a href="{{ path_for('team-detail', {'league_id':league.id,'team_id':team.id}) }}">
+                    {{ team.name }} ({{ team.user.name}})
+                </a>
             </li>
         {% endfor %}
     </ul>
@@ -14,6 +16,14 @@
         <label for="name">Nome</label>
         <input type="text" name="name" id="name" />
         <br/>
+        <label for="user">User</label>
+        <select id="user" name="user_id">
+            {% for user in users %}
+                <option value="{{ user.id }}">{{ user.name }}</option>
+            {% endfor %}
+        </select>
+        <br/>
+        <input type="hidden" name="league_id" value="{{ league.id }}">
         <input type="submit" value="Salva">
 
     </form>

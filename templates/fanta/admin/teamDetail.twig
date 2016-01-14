@@ -3,10 +3,27 @@
 {% block corpo %}
     <h1>{{ team.name }}</h1>
     <ul>
-        {% for player in players %}
+        {% for contract in team.contracts %}
             <li>
-                {{ player.name }}
+                {{ contract.player.name }} ({{ contract.cost }})
             </li>
         {% endfor %}
     </ul>
+    <h2>Aggiungi nuovo</h2>
+    <form action="{{ path_for('contract-add', {'league_id':team.league.id,'team_id':team.id}) }}" method="post">
+        <label for="cost">Costo</label>
+        <input type="text" name="cost" id="cost" />
+        <br/>
+        <label for="player">Player</label>
+        <select id="player" name="player_id">
+            {% for player in players %}
+                <option value="{{ player.id }}">{{ player.name }}</option>
+            {% endfor %}
+        </select>
+        <br/>
+        <input type="hidden" name="team_id" value="{{ team.id }}">
+        <input type="hidden" name="league_id" value="{{ team.league.id }}">
+        <input type="submit" value="Salva">
+
+    </form>
 {% endblock %}

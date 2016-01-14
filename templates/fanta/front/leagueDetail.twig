@@ -1,0 +1,13 @@
+{% extends 'fanta/admin/includes/layout.twig' %}
+
+{% block corpo %}
+    <h1>{{ league.name }}</h1>
+    <ul>
+        {% for team in teams %}
+            <li>
+                <a href="{{ path_for('team-detail', {'team_id':team.id}) }}">{{ team.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

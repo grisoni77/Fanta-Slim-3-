@@ -1,5 +1,5 @@
 <?php
-namespace Fanta\Entities;
+namespace Fanta\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
 
@@ -43,11 +43,11 @@ class User
     /**
      * Add team
      *
-     * @param \Fanta\Entities\Team $team
+     * @param \Fanta\Entity\Team $team
      *
      * @return User
      */
-    public function addTeam(\Fanta\Entities\Team $team)
+    public function addTeam(\Fanta\Entity\Team $team)
     {
         $this->teams[] = $team;
 
@@ -57,9 +57,9 @@ class User
     /**
      * Remove team
      *
-     * @param \Fanta\Entities\Team $team
+     * @param \Fanta\Entity\Team $team
      */
-    public function removeTeam(\Fanta\Entities\Team $team)
+    public function removeTeam(\Fanta\Entity\Team $team)
     {
         $this->teams->removeElement($team);
     }

@@ -22,7 +22,9 @@ return [
                 'dbname'   => 'dbphp',
                 'host'      => 'mysqlphp',
             ],
-            'annotation_paths' => [__DIR__ . '/Fanta/Entities'],
+            'annotation_paths' => [__DIR__ . '/Fanta/Entity'],
+            'auto_generate_proxies' => true,
+            'proxy_path' => __DIR__ . '/../cache/doctrine',
         ],
 
         // Monolog settings
