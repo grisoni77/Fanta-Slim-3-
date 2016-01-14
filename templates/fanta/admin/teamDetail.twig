@@ -1,0 +1,12 @@
+{% extends 'fanta/admin/includes/layout.twig' %}
+
+{% block corpo %}
+    <h1>{{ team.name }}</h1>
+    <ul>
+        {% for player in players %}
+            <li>
+                {{ player.name }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

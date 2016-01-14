@@ -1,0 +1,19 @@
+{% extends 'fanta/admin/includes/layout.twig' %}
+
+{% block corpo %}
+    <h1>Users</h1>
+    <ul>
+    {% for user in users %}
+        <li>{{ user.name }}</li>
+    {% endfor %}
+    </ul>
+
+    <h2>Aggiungi nuovo</h2>
+    <form action="{{ path_for('user-add') }}" method="post">
+        <label for="name">Nome</label>
+        <input type="text" name="name" id="name" />
+        <br/>
+        <input type="submit" value="Salva">
+
+    </form>
+{% endblock %}
