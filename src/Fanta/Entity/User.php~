@@ -13,6 +13,8 @@ class User
     protected $id;
     /** @ORM\Column(type="string") **/
     protected $name;
+    /** @ORM\Column(type="string") **/
+    protected $password;
     /**
      * @ORM\OneToMany(targetEntity="Team", mappedBy="user")
      **/

@@ -10,11 +10,16 @@
     <nav>
         <ul>
             <li>
-                <a href="{{ path_for('league-list') }}">Home</a>
+                <a href="{{ path_for('front-index') }}">Home</a>
             </li>
             <li>
-                <a href="{{ path_for('user-profile') }}">Profile</a>
+                <a href="{{ path_for('front-teams') }}">Items</a>
             </li>
+            {% if (session) %}
+            <li>
+                <a href="{{ path_for('front-logout') }}">Esci</a>
+            </li>
+            {% endif %}
         </ul>
     </nav>
 {% endblock %}

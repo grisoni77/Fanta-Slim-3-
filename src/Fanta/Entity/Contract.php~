@@ -104,4 +104,28 @@ class Contract
     {
         return $this->team;
     }
+
+    /**
+     * Set league
+     *
+     * @param \Fanta\Entity\League $league
+     *
+     * @return Contract
+     */
+    public function setLeague(\Fanta\Entity\League $league)
+    {
+        $this->league = $league;
+
+        return $this;
+    }
+
+    /**
+     * Get league
+     *
+     * @return \Fanta\Entity\League
+     */
+    public function getLeague()
+    {
+        return $this->league;
+    }
 }

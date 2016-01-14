@@ -1,0 +1,15 @@
+{% extends 'fanta/front/includes/layout.twig' %}
+
+{% block corpo %}
+    <h1>Items</h1>
+    <ul>
+    {% for team in teams %}
+        <li>
+            <a href="{{ path_for('front-team-detail', {'team_id':team.id}) }}">
+                {{ team.name }} ({{ team.league.name }})
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}

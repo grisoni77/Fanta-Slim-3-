@@ -33,7 +33,27 @@ class Front
         return $renderer->render($response, 'fanta/front/index.twig', $args);
     }
 
+    public function login(Request $request, $response, $args)
+    {
+        /** @var EntityManager $em */
+        $em = $this->container->entityManager;
+        $data = $request->getParsedBody();
+        $user = $em->getRepository('Fanta\Entity\User')->findOneBy(array('name' => $data['user']));
+        if (!$user) {
+            return $response->withStatus(403, 'User not found');
+        }
+        if ($user->getPassword() != $this->container->auth->getEncryptedPassword($data['password'])) {
+            return $response->withStatus(403, 'Incorrect password');
+        }
+        $this->container->session->createSession($user);
+        return $response->withRedirect($this->container->router->pathFor('front-teams'));
+    }
 
+    public function logout(Request $request, $response, $args)
+    {
+        $this->container->session->destroySession($user);
+        return $response->withRedirect($this->container->router->pathFor('front-index'));
+    }
 
     public function leagueList($request, $response, $args)
     {
@@ -64,7 +84,20 @@ class Front
         ));
     }
 
+    public function teamList($request, $response, $args)
+    {
+        $user_id = $this->container->session->getVar('userid');
 
+        /** @var Doctrine\ORM\EntityManager $em */
+        $em = $this->container->entityManager;
+        $repo = $em->getRepository('Fanta\Entity\Team');
+        $teams = $repo->findBy(array('user'=>$user_id));
+
+        $renderer = $this->getRenderer();
+        return $renderer->render($response, 'fanta/front/teamList.twig', array(
+            'teams' => $teams,
+        ));
+    }
 
     public function teamDetail($request, $response, $args)
     {

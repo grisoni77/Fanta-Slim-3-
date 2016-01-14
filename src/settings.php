@@ -3,6 +3,10 @@ return [
     'settings' => [
         'displayErrorDetails' => true,
 
+        'auth' => [
+            'secret' => 'verylongsecretsecretword',
+        ],
+
         // Renderer settings
         'renderer' => [
             'template_path' => __DIR__ . '/../templates/',

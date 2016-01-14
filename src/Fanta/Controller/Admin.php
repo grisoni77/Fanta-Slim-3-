@@ -27,6 +27,14 @@ class Admin
         return $this->container->twig;
     }
 
+    public function logout(Request $request, Response $response, $args)
+    {
+        $router = $this->container->get('router');
+        return $response
+            ->withStatus(401, 'Unauthorised')
+            ;
+    }
+
     public function index($request, $response, $args)
     {
         $renderer = $this->getRenderer();
@@ -53,6 +61,7 @@ class Admin
         $em = $this->container->entityManager;
         $user = new User();
         $user->setName($data['name']);
+        $user->setPassword($this->container->auth->getEncryptedPassword($data['password']));
         $em->persist($user);
         $em->flush();
 

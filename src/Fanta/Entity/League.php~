@@ -77,4 +77,38 @@ class League
     {
         return $this->teams;
     }
+
+    /**
+     * Add contract
+     *
+     * @param \Fanta\Entity\Contract $contract
+     *
+     * @return League
+     */
+    public function addContract(\Fanta\Entity\Contract $contract)
+    {
+        $this->contracts[] = $contract;
+
+        return $this;
+    }
+
+    /**
+     * Remove contract
+     *
+     * @param \Fanta\Entity\Contract $contract
+     */
+    public function removeContract(\Fanta\Entity\Contract $contract)
+    {
+        $this->contracts->removeElement($contract);
+    }
+
+    /**
+     * Get contracts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContracts()
+    {
+        return $this->contracts;
+    }
 }

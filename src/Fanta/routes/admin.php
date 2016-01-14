@@ -1,7 +1,8 @@
 <?php
 
 $app->group('/admin', function() {
-    $this->get('', 'Fanta\\Controller\\Admin:index');
+    $this->get('', 'Fanta\\Controller\\Admin:index')->setName('admin-index');
+    $this->get('/logout', 'Fanta\\Controller\\Admin:logout')->setName('admin-logout');
     $this->get('/users', 'Fanta\\Controller\\Admin:userList')->setName('user-list');
     $this->post('/users/add', 'Fanta\\Controller\\Admin:userAdd')->setName('user-add');
     $this->group('/leagues', function() {
@@ -17,4 +18,11 @@ $app->group('/admin', function() {
         });
     });
 
-});
+})
+    ->add(new \Slim\Middleware\HttpBasicAuthentication([
+        "secure" => false,
+        "users" => [
+            "admin" => "password"
+        ]
+    ]))
+;
